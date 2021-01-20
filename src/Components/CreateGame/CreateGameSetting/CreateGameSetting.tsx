@@ -1,30 +1,43 @@
 import {Wrapper, ButtonStart} from "./createGameSetting.style";
-import { useForm } from "react-hook-form";
+import {useForm} from "react-hook-form";
 import Header from "../../Header/Header";
 import CreateGameItem from "../CreateGameItem/CreateGameItem";
 
+const inputsCreateGame = [
+    {
+        order: 1,
+        type: "checkbox",
+        fieldName: "online",
+        title: "Онлайн раздача",
+        description: "вы получите код игры, по которому остальные игроки смогут подключиться",
+    },
+    {
+        order: 2,
+        type: "checkbox",
+        fieldName: "leading",
+        title: "Выбрать ведущего",
+        description: "ведущий задаёт вопрос первым",
+    },
+]
+
 
 const CreateGameSetting = () => {
-    const { register, handleSubmit, watch, errors } = useForm();
+    const {register, handleSubmit} = useForm();
     const onSubmit = (data: any) => console.log(data);
-
     return (
         <Wrapper>
-            <Header isHaveStepBack={true}>Создать игру</Header>
-            <CreateGameItem isHaveCheckBox={true} value={false} title="Онлай-раздача" description="вы получите код игры, по которому остальные игроки смогут подключиться"/>
-            <ButtonStart>Начать</ButtonStart>
+            <form onSubmit={handleSubmit(onSubmit)}>
+                <Header isHaveStepBack={true}>Создать игру</Header>
+
+                {inputsCreateGame.map(input =>(
+                    <CreateGameItem key={input.order} isHaveCheckBox={true} title={input.title}
+                                    description={input.description}
+                                    name={input.fieldName} register={register}/>
+                ))}
+
+                <ButtonStart type="submit">Начать</ButtonStart>
+            </form>
         </Wrapper>
-        // <form onSubmit={handleSubmit(onSubmit)}>
-        //     {/* register your input into the hook by invoking the "register" function */}
-        //     <input name="example" defaultValue="test" ref={register} />
-        //
-        //     {/* include validation with required or other standard HTML validation rules */}
-        //     <input name="exampleRequired" ref={register({ required: true })} />
-        //     {/* errors will return when field validation fails  */}
-        //     {errors.exampleRequired && <span>This field is required</span>}
-        //
-        //     <input type="submit" />
-        // </form>
     )
 }
 

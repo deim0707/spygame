@@ -1,8 +1,9 @@
+import {FC} from "react";
 import {
     Wrapper,
     Title,
     Image,
-    MainContentWrapper,
+    TextContentWrapper,
     Description,
     Button,
     CheckBox,
@@ -10,39 +11,40 @@ import {
     styleImage
 } from "./createGameItem.style";
 import {ReactComponent as TempImage} from './tempImg.svg';
-import "./tempImg.svg"
-import {FC} from "react";
-
 
 interface Props {
     image?: any, // todo добавить в дальнейшем
     title: string,
     description: string,
-    value: any,
     isHaveCheckBox?: boolean,
     isHaveNumberValue?: boolean,
     isHaveTimer?: boolean,
     isHaveRandom?: boolean,
+    register?: any,
+    name?: string,
 }
+
+// TODO доделать компонент под различные состояния
 
 const CreateGameItem: FC<Props> = ({
                                        title,
                                        description,
                                        isHaveCheckBox = false,
-                                       value,
                                        isHaveNumberValue = false,
                                        isHaveTimer = false,
                                        isHaveRandom = false,
+                                       register,
+                                       name
                                    }) => {
+
     return (
         <Wrapper>
-            <Title>{title}</Title>
-            <MainContentWrapper>
-                <TempImage style={styleImage}/>
+            <TempImage style={styleImage}/>
+            <TextContentWrapper>
+                <Title>{title}</Title>
                 <Description>{description}</Description>
-                {isHaveCheckBox && <CheckBox checked={value}/>}
-            </MainContentWrapper>
-
+            </TextContentWrapper>
+            {isHaveCheckBox && <CheckBox ref={register} name={name}/>}
         </Wrapper>
     )
 }
