@@ -1,18 +1,17 @@
 import {FC} from "react";
-import styled from "styled-components";
+import {Wrapper, ButtonStepBack,TextContent} from "./header.style";
 
 interface Props {
-    children: JSX.Element[] | JSX.Element | string
+    children: JSX.Element[] | JSX.Element | string;
+    isHaveStepBack?: boolean;
 }
 
-const HeaderC = styled.div`
-  width: 100%;
-  text-align: start;
-`;
-
-const Header: FC<Props> = ({children}) => {
+const Header: FC<Props> = ({children, isHaveStepBack=false}) => {
     return (
-        <HeaderC>{children}</HeaderC>
+        <Wrapper>
+            {isHaveStepBack && <ButtonStepBack>&#8592;</ButtonStepBack>}
+            <TextContent isHaveStepBack={isHaveStepBack}>{children}</TextContent>
+        </Wrapper>
     )
 }
 
