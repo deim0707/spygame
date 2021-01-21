@@ -8,4 +8,12 @@ export const Wrapper = styled.article`
   align-items: center;
 `
 
-export const ButtonStart = styled(Button)``
+export const Form = styled.form`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+`;
+
+export const ButtonStart = styled(Button)`
+align-self: center
+`
