@@ -1,4 +1,4 @@
-import {FC, useCallback, useState} from "react";
+import {FC} from "react";
 import {
     Wrapper,
     MainContentWrapper,
@@ -8,14 +8,15 @@ import {
     Description,
     SettingButton,
     CheckBox,
-    NumberValue,
+    NumberInput,
     InputWrapper,
     styleImage,
     ImageWrapper,
     SettingItemWrapper
 } from "./createGameItem.style";
-import {TypeSettingGame} from "../../../Assets/Content/SettingItems";
+import {TypeSettingGame} from "../../../assets/content/SettingItems";
 import {ReactComponent as TempImage} from './tempImg.svg';
+import useCreateGameItem from "./useCreateGameItem.hook";
 
 interface Props {
     image?: any, // todo добавить в дальнейшем
@@ -24,6 +25,10 @@ interface Props {
     type: TypeSettingGame,
     register: any,
     name: string,
+    setValue: any,
+    getValues: any,
+    min: number | undefined,
+    max: number | undefined,
 }
 
 const CreateGameItem: FC<Props> = ({
@@ -31,16 +36,17 @@ const CreateGameItem: FC<Props> = ({
                                        description,
                                        type,
                                        register,
-                                       name
+                                       name,
+                                       setValue,
+                                       getValues,
+                                       min, max
                                    }) => {
-
-    const [valueInput, setValueInput] = useState(0);
-    const decr = useCallback(() => setValueInput(oldVal => oldVal - 1), [])
-    const incr = useCallback(() => setValueInput(oldVal => oldVal + 1), [])
-
-    const isCheckbox = type === "checkbox",
-        isRandom = type === "count+random",
-        isCount = type === "count";
+    const {
+        setValueField,
+        isCheckbox,
+        isRandom,
+        isCount,
+    } = useCreateGameItem({type, getValues, setValue, min, max})
 
     return (
         <Wrapper>
@@ -55,14 +61,14 @@ const CreateGameItem: FC<Props> = ({
                 <InputWrapper>
                     {isCheckbox && <CheckBox ref={register} name={name}/>}
                     {(isCount || isRandom) && (
-                        <NumberValue ref={register} name={name} disabled value={valueInput}/>
+                        <NumberInput ref={register} name={name} defaultValue={0}/>
                     )}
                 </InputWrapper>
             </MainContentWrapper>
             {(isCount || isRandom) && (
                 <SettingItemWrapper>
-                    <SettingButton onClick={decr}>-</SettingButton>
-                    <SettingButton onClick={incr}>+</SettingButton>
+                    <SettingButton onClick={() => setValueField(name, "decr")}>-</SettingButton>
+                    <SettingButton onClick={() => setValueField(name, "incr")}>+</SettingButton>
                     {isRandom && <SettingButton>?</SettingButton>}
                 </SettingItemWrapper>
             )}

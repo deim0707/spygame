@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import {Button} from "../../WelcomePage/welcomePage.style";
+import {Button} from "../../../assets/styles/sharedElements.style";
 
 export const Wrapper = styled.article`
   padding: 0 .6rem;

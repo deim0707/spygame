@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import {Button} from "../../WelcomePage/welcomePage.style";
+import {Button} from "../../../assets/styles/sharedElements.style";
 
 
 export const Wrapper = styled.div`
@@ -72,9 +72,18 @@ export const SettingButton = styled(Button).attrs({
   margin-left: .5rem;
 `
 
-export const NumberValue = styled.input.attrs({
+export const NumberInput = styled.input.attrs({
     type: "number",
-})``;
+})`
+  ::-webkit-inner-spin-button{
+    -webkit-appearance: none;
+    margin: 0;
+  }
+  ::-webkit-outer-spin-button{
+    -webkit-appearance: none;
+    margin: 0;
+  }
+`;
 
 
 

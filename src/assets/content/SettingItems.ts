@@ -6,6 +6,8 @@ interface ISettingsGame {
     fieldName: string,
     title: string,
     description: string,
+    min?: number,
+    max?: number,
 }
 
 export const settingItems: ISettingsGame[] = [
@@ -29,5 +31,7 @@ export const settingItems: ISettingsGame[] = [
         fieldName: "countPlayers",
         title: "Колличество шпионов",
         description: "из общего колличества игроков",
+        min: 0,
+        max: 10,
     },
 ]

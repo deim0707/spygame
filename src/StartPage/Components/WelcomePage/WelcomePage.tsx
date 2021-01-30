@@ -1,6 +1,7 @@
 import {FC} from "react";
-import {Wrapper, ButtonWrapper, Button} from "./welcomePage.style";
-import Header from "../Header/Header";
+import {Wrapper, ButtonWrapper} from "./welcomePage.style";
+import {Button} from "../../../assets/styles/sharedElements.style";
+import Header from "../../../assets/Components/Header/Header";
 
 
 const WelcomePage:FC = () => {

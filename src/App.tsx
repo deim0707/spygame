@@ -1,6 +1,6 @@
 import React from 'react';
-import WelcomePage from "./Components/WelcomePage/WelcomePage";
-import CreateGameSetting from "./Components/CreateGame/CreateGameSetting/CreateGameSetting";
+import WelcomePage from "./StartPage/Components/WelcomePage/WelcomePage";
+import CreateGameSetting from "./CreateGame/Components/CreateGameSetting/CreateGameSetting";
 
 function App() {
   return (
