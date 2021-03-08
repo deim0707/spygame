@@ -34,6 +34,7 @@ export const CheckBox = styled.input.attrs({
 export const SettingItemWrapper = styled.div`
   display: flex;
   justify-content: flex-end;
+  align-items: center;
 `
 
 export const SettingButton = styled(Button).attrs({
@@ -42,6 +43,7 @@ export const SettingButton = styled(Button).attrs({
   width: 60px;
   height: 40px;
   margin-left: .5rem;
+  margin-top: 0;
   :disabled {
     cursor: not-allowed;
     :hover {
@@ -53,6 +55,7 @@ export const SettingButton = styled(Button).attrs({
 export const NumberInput = styled.input.attrs({
     type: "number",
 })`
+  text-align: center;
   ::-webkit-inner-spin-button{
     -webkit-appearance: none;
     margin: 0;
@@ -62,6 +65,10 @@ export const NumberInput = styled.input.attrs({
     margin: 0;
   }
 `;
+
+export const ErrorMessage = styled.div`
+  color: red;
+`
 
 
 

@@ -5,7 +5,8 @@ import {
     NumberInput,
     SettingButton,
     SettingItemWrapper,
-    Wrapper
+    Wrapper,
+    ErrorMessage,
 } from "../createGameItem.style";
 import TemplateSettingItem from "../TemplateSettingItem/TemplateSettingItem";
 import {ISettingsGame} from "../../../../assets/content/SettingItems";
@@ -28,29 +29,35 @@ const CounterSetting: FC<Props> = ({
                                        getValues,
                                        errors,
                                    }) => {
+
     const {
         title,
         description,
         fieldName,
+        defaultValue,
+        errorMessage,
+        min,
+        max,
         incrementValueField,
         decrementValueField,
+        isRandom,
         isIncrementDisabled,
         isDecrementDisabled,
-    } = useCounterSetting({getValues, setValue, settingItem})
+    } = useCounterSetting({getValues, setValue, settingItem, errors})
 
-    const isRandom = true; // todo передавать в пропсах
     return (
         <Wrapper>
             <MainContentWrapper>
                 <TemplateSettingItem title={title} description={description}/>
                 <InputWrapper>
                     <NumberInput ref={register({
-                        min: {value: 0, message: "Слишком мало"},
-                        max: {value: 10, message: "Превышено максимальное число"}
-                    })} name={fieldName} defaultValue={0}/>
+                        min: {value: min, message: `Минимум ${min}`},
+                        max: {value: max, message: `Максимум ${max}`}
+                    })} name={fieldName} defaultValue={defaultValue}/>
                 </InputWrapper>
             </MainContentWrapper>
             <SettingItemWrapper>
+               <ErrorMessage>{errorMessage}</ErrorMessage>
                 <SettingButton onClick={decrementValueField} disabled={isDecrementDisabled}>-</SettingButton>
                 <SettingButton onClick={incrementValueField} disabled={isIncrementDisabled}>+</SettingButton>
                 {isRandom && <SettingButton>?</SettingButton>}

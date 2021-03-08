@@ -5,17 +5,36 @@ interface Props {
     settingItem: ISettingsGame,
     setValue: any,
     getValues: any,
+    errors: any,
 }
 
-const useCounterSetting = ({getValues, setValue, settingItem}: Props) => {
+interface Returned {
+    title: string,
+    description: string,
+    fieldName: string,
+    defaultValue: any,
+    errorMessage: string | undefined,
+    isRandom: boolean,
+    min: number,
+    max: number,
+    isIncrementDisabled: boolean,
+    isDecrementDisabled: boolean,
+    incrementValueField: () => void,
+    decrementValueField: () => void,
+}
+
+const useCounterSetting = ({getValues, setValue, settingItem, errors}: Props): Returned => {
     const {
         title,
         description,
         fieldName,
+        defaultValue,
     } = settingItem;
 
-    const min: number = useMemo(() => settingItem?.min || -1, [settingItem]),
-        max: number = useMemo(() => settingItem?.max || 50, [settingItem]);
+    const isRandom = useMemo(()=>settingItem.type === "count+random",[settingItem.type]);
+
+    const min: number = useMemo(() => settingItem?.min ?? -1, [settingItem]),
+        max: number = useMemo(() => settingItem?.max ?? 50, [settingItem]);
 
     const [isIncrementDisabled, setIsIncrementDisabled] = useState<boolean>(false)
     const [isDecrementDisabled, setIsDecrementDisabled] = useState<boolean>(false)
@@ -51,12 +70,19 @@ const useCounterSetting = ({getValues, setValue, settingItem}: Props) => {
 
     }, [fieldName, getValues, min, setIsButtonDisabled, setValue])
 
+    const errorMessage = errors[fieldName]?.message;
+
     return {
         title,
         description,
         fieldName,
+        defaultValue: defaultValue ?? 0,
+        errorMessage,
+        isRandom,
         isIncrementDisabled,
         isDecrementDisabled,
+        min,
+        max,
         incrementValueField,
         decrementValueField,
     }

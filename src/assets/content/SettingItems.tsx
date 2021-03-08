@@ -10,6 +10,7 @@ export interface ISettingsGame {
     fieldName: string,
     title: string,
     description: string,
+    defaultValue?: string | number | boolean,
     min?: number,
     max?: number,
     errorMessage?: string,
@@ -22,6 +23,7 @@ export const settingItems: ISettingsGame[] = [
         fieldName: "online",
         title: "Онлайн раздача",
         description: "вы получите код игры, по которому остальные игроки смогут подключиться",
+        defaultValue: false,
     },
     {
         order: 2,
@@ -29,6 +31,7 @@ export const settingItems: ISettingsGame[] = [
         fieldName: "leading",
         title: "Выбрать ведущего",
         description: "ведущий задаёт вопрос первым",
+        defaultValue: true,
     },
     {
         order: 3,
@@ -36,7 +39,8 @@ export const settingItems: ISettingsGame[] = [
         fieldName: "countPlayers",
         title: "Колличество шпионов",
         description: "из общего колличества игроков",
-        min: 0,
+        defaultValue: 1,
+        min: 1,
         max: 10,
     },
 ]

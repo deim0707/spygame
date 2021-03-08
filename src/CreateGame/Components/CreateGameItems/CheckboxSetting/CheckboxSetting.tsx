@@ -8,13 +8,15 @@ interface Props {
     register: any
 }
 
-const CheckboxSetting: FC<Props> = ({settingItem,register}) => {
+const CheckboxSetting: FC<Props> = ({settingItem, register}) => {
+    const {title, defaultValue, description, fieldName} = settingItem;
+//todo Добавить чтение дефолтного значения
     return (
         <Wrapper>
             <MainContentWrapper>
-                <TemplateSettingItem title={settingItem.title} description={settingItem.description}/>
+                <TemplateSettingItem title={title} description={description}/>
                 <InputWrapper>
-                    <CheckBox ref={register} name={settingItem.fieldName}/>
+                    <CheckBox ref={register} name={fieldName}/>
                 </InputWrapper>
             </MainContentWrapper>
         </Wrapper>
