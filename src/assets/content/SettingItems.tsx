@@ -1,6 +1,10 @@
+import {ReactNode} from "react";
+import CounterSetting from "../../CreateGame/Components/CreateGameItems/CounterSetting/CounterSetting";
+import CheckboxSetting from "../../CreateGame/Components/CreateGameItems/CheckboxSetting/CheckboxSetting";
+
 export type TypeSettingGame = "checkbox" | "count+random" | "count" | "timer";
 
-interface ISettingsGame {
+export interface ISettingsGame {
     order: number,
     type: TypeSettingGame,
     fieldName: string,
@@ -8,6 +12,7 @@ interface ISettingsGame {
     description: string,
     min?: number,
     max?: number,
+    errorMessage?: string,
 }
 
 export const settingItems: ISettingsGame[] = [
@@ -35,3 +40,14 @@ export const settingItems: ISettingsGame[] = [
         max: 10,
     },
 ]
+
+type TypeSettingComponentsByType = {
+    [key in TypeSettingGame]: ReactNode;
+};
+
+export const settingComponentsByType: TypeSettingComponentsByType = {
+    "count+random": CounterSetting,
+    "checkbox": CheckboxSetting,
+    "count": CounterSetting,
+    "timer": CounterSetting,
+}

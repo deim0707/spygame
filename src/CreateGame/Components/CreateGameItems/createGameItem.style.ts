@@ -20,34 +20,6 @@ export const MainContentWrapper = styled.label`
   justify-content: space-between;
 `
 
-export const ImageWrapper = styled.div`
-  width: 20%;
-  display: flex;
-  align-items: center;
-`;
-
-export const Image = styled.img``;
-export const styleImage = { // todo убрать, когда появятся нормальные изображения
-    width: "50px",
-    height: "50px"
-}
-
-export const TextContentWrapper = styled.div`
-  width: 60%;
-  display: flex;
-  flex-direction: column;
-  align-items: start;
-`;
-
-export const Title = styled.div`
-  font-size: 1.2rem;
-  text-align: center;
-`;
-
-export const Description = styled.div`
-  margin-top: .5rem;
-`;
-
 export const InputWrapper = styled.div`
   width: 20%;
   display: flex;
@@ -70,6 +42,12 @@ export const SettingButton = styled(Button).attrs({
   width: 60px;
   height: 40px;
   margin-left: .5rem;
+  :disabled {
+    cursor: not-allowed;
+    :hover {
+      background-color: transparent;
+    }
+  }
 `
 
 export const NumberInput = styled.input.attrs({
